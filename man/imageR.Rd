@@ -4,7 +4,7 @@
 \alias{imageR}
 \title{<Add Title>}
 \usage{
-imageR(message, width = NULL, height = NULL)
+imageR(img = NULL, width = NULL, height = NULL)
 }
 \description{
 <Add Description>

@@ -5,11 +5,11 @@
 #' @import htmlwidgets
 #'
 #' @export
-imageR <- function(message, width = NULL, height = NULL) {
+imageR <- function(img = NULL, width = NULL, height = NULL) {
 
   # forward options using x
   x = list(
-    message = message
+    img = img
   )
 
   # create widget
@@ -21,6 +21,7 @@ imageR <- function(message, width = NULL, height = NULL) {
     package = 'imageR'
   )
 }
+
 
 #' Widget output function for use in Shiny
 #'

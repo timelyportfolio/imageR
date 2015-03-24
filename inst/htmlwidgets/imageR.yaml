@@ -3,4 +3,4 @@ dependencies:
     version: 0.1
     src: htmlwidgets/lib/intense-images
     script: intense.min.js
-    #stylesheet:
+    stylesheet: intense_styles.css
