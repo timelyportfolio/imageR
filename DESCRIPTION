@@ -1,10 +1,21 @@
 Package: imageR
 Type: Package
-Title: What the Package Does (Title Case)
+Title: htmlwidget for intense-images
 Version: 0.1
 Date: 2015-03-24
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Authors@R: c(
+    person(
+      "Mike", "Bostock", role = c("aut", "cph"), comment =
+      "intense-images library in htmlwidgets/lib, http://tholman.com/intense-images/"
+    ),
+    person(
+      "Kenton","Russell", role = c("aut","cre"), comment = "R interface",
+      email = "kent.russell@timelyportfolio.com"
+    )
+  )
+Maintainer: Kenton Russell <kent.russell@timelyportfolio.com>
+Description: imageR provides an unique pan and zoom image experience for your R graphics.
+    As an \code{htmlwidget} interface to \link{http://tholman.com/intense-images}, \code{imageR}
+    plugs right into your HTML regardless of your context.
+License: MIT
 LazyData: TRUE
