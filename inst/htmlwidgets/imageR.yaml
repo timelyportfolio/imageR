@@ -1,0 +1,6 @@
+dependencies:
+  - name: intense-images
+    version: 0.1
+    src: htmlwidgets/lib/intense-images
+    script: intense.min.js
+    #stylesheet:
