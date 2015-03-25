@@ -3,4 +3,5 @@
 export(imageR)
 export(imageROutput)
 export(renderImageR)
-import(htmlwidgets)
+import("htmlwidgets,")
+import(htmltools)

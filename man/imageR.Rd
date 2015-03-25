@@ -2,11 +2,29 @@
 % Please edit documentation in R/imageR.R
 \name{imageR}
 \alias{imageR}
-\title{<Add Title>}
+\title{Full screen pannable R plots for the web}
 \usage{
 imageR(img = NULL, selector = NULL, width = NULL, height = NULL)
 }
+\arguments{
+\item{img}{\code{string} of a img with src equal to
+url or a \code{base64} encoded image or a \code{tag}
+from \code{htmltools}.  Note, the \code{tag} does not need to be an \code{img}
+and also does not need to contain an image.  If using a \code{tag}, the attributes
+\code{"data-image"}, \code{"data-title"}, and \code{"data-caption"} should contain
+the information to render the intense-image as desired.}
+
+\item{selector}{\code{string} of the css selector of the element for which
+you would like to apply intense-images.  The attributes
+\code{"data-image"}, \code{"data-title"}, and \code{"data-caption"}
+should contain the information to render the intense-image as desired.}
+
+\item{width}{\code{integer} in px for the width of the \code{div} container.}
+
+\item{height}{\code{integer} in px for the height of the  \code{div} container.}
+}
 \description{
-<Add Description>
+\code{imageR} is the primary function to wrap a plot or HTML element with the
+effect provided by \href{http://tholman.com/intense-images/}{\code{intense-images}}.
 }
 

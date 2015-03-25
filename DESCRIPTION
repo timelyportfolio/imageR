@@ -19,3 +19,8 @@ Description: imageR provides an unique pan and zoom image experience for your R 
     plugs right into your HTML regardless of your context.
 License: MIT
 LazyData: TRUE
+Suggests:
+    base64enc,
+    knitr,
+    testthat
+VignetteBuilder: knitr
