@@ -3,6 +3,8 @@
 **This is experimental and pre-alpha**, but if you do everything just right you might get some worthwhile output.
 
 
+As I was working on `imageR`, I discovered this poster [Redesign of cluster heatmap visualization technique](http://vizbi.org/Posters/2015/B04) through this [tweet](https://twitter.com/QuartzBio/status/580740607758467072).  The full-page zoomable is very similar to the effect achieved by `imageR`, so `imageR` might be a good preview for your next conferenct poster.
+
 ```r
 # devtools::install_github("timelyportfolio/imageR")
 
@@ -24,21 +26,33 @@ library(imageR)
 
 tf <- tempfile()
 tf2 <- tempfile()
-png( file = tf, height = 600, width = 600 )
-  image(volcano)
+png( file = tf, height = 400, width = 1600 )
+  #example from ?lattice::cloud
+  cloud(Sepal.Length ~ Petal.Length * Petal.Width | Species, data = iris,
+    screen = list(x = -90, y = 70), distance = .4, zoom = .6)
 dev.off()
 
-png( file = tf2, height = 610, width = 870)
-  ## volcano  ## 87 x 61 matrix
-wireframe(volcano, shade = TRUE,
-          aspect = c(61/87, 0.4),
-          light.source = c(10,0,10))
+png( file = tf2, height = 1000, width = 1000)
+  #### example from http://www.cceb.med.upenn.edu/pages/courses/BSTA670/2012/R_3D_plot_ex.r
+  #--------------------------------
+  # persp plot of function
+  #--------------------------------
+  x <- seq(-10, 10, length= 30)
+  y <- x
+  f <- function(x,y) { r <- sqrt(x^2+y^2); 10 * sin(r)/r }
+  z <- outer(x, y, f)
+  z[is.na(z)] <- 1
+  op <- par(bg = "white")
+  persp(x, y, z, theta = 30, phi = 30, expand = 0.5, col = "lightblue")
 dev.off()
 
-html_print(fluidPage(fluidRow(
-  column(width = 6,  imageR(base64::img(tf)))
-  ,column(width = 6,  imageR(base64::img(tf2)))
-)))
+html_print(fluidPage(
+  tags$h1("Cloud and Wireframe from Lattice")
+  ,fluidRow(style = "height:60%; overflow:hidden;"
+    ,column(width = 6,  imageR(base64::img(tf)))
+    ,column(width = 6,  imageR(base64::img(tf2)))
+  )
+))
 ```
 
 ```r
