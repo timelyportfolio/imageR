@@ -5,11 +5,16 @@
 #' @import htmlwidgets
 #'
 #' @export
-imageR <- function(img = NULL, width = NULL, height = NULL) {
+imageR <- function(img = NULL, selector = NULL, width = NULL, height = NULL) {
+
+  if( inherits(img, "shiny.tag") ){
+    img = as.character(img)
+  }
 
   # forward options using x
   x = list(
     img = img
+    ,selector = selector
   )
 
   # create widget
