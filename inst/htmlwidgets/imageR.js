@@ -14,7 +14,7 @@ HTMLWidgets.widget({
 
     el.innerHTML = x.img;
 
-    Intense(el.getElementsByTagName("img"))
+    Intense(el.childNodes)
 
   },
 

@@ -56,3 +56,17 @@ imageR(
   )
 )
 ```
+
+```r
+library(ggplot2)
+png( file = tf, height = 1400, width = 1400 )
+  ggplot(diamonds, aes(carat, price)) + geom_hex()
+dev.off()
+
+imageR(
+  tags$div(
+    tags$h1("does this work?")
+    ,"data-image" = paste0("data:image/png;base64,",base64enc::base64encode(tf))
+  )
+)
+```
