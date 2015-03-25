@@ -1,6 +1,6 @@
 #' Full screen pannable R plots for the web
 #'
-#' \code{imageR} is the primary function to wrap a plot or HTML element with the
+#' \code{intense} wraps a plot or HTML element with the
 #' effect provided by \href{http://tholman.com/intense-images/}{\code{intense-images}}.
 #'
 #' @param img \code{string} of a img with src equal to
@@ -16,10 +16,10 @@
 #' @param width \code{integer} in px for the width of the \code{div} container.
 #' @param height \code{integer} in px for the height of the  \code{div} container.
 #'
-#' @import htmlwidgets, htmltools
+#' @import htmlwidgets htmltools
 #'
 #' @export
-imageR <- function(img = NULL, selector = NULL, width = NULL, height = NULL) {
+intense <- function(img = NULL, selector = NULL, width = NULL, height = NULL) {
 
   if( inherits(img, "shiny.tag") ){
     img = as.character(img)
@@ -33,7 +33,7 @@ imageR <- function(img = NULL, selector = NULL, width = NULL, height = NULL) {
 
   # create widget
   htmlwidgets::createWidget(
-    name = 'imageR',
+    name = 'intense',
     x,
     width = width,
     height = height,
@@ -45,8 +45,8 @@ imageR <- function(img = NULL, selector = NULL, width = NULL, height = NULL) {
 #' Widget output function for use in Shiny
 #'
 #' @export
-imageROutput <- function(outputId, width = '100%', height = '400px'){
-  shinyWidgetOutput(outputId, 'imageR', width, height, package = 'imageR')
+intenseOutput <- function(outputId, width = '100%', height = '400px'){
+  shinyWidgetOutput(outputId, 'intense', width, height, package = 'imageR')
 }
 
 #' Widget render function for use in Shiny
@@ -54,5 +54,5 @@ imageROutput <- function(outputId, width = '100%', height = '400px'){
 #' @export
 renderImageR <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
-  shinyRenderWidget(expr, imageROutput, env, quoted = TRUE)
+  shinyRenderWidget(expr, intenseOutput, env, quoted = TRUE)
 }

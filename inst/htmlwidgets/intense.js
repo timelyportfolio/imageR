@@ -1,6 +1,6 @@
 HTMLWidgets.widget({
 
-  name: 'imageR',
+  name: 'intense',
 
   type: 'output',
 

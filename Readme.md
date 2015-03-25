@@ -15,7 +15,7 @@ png( file = tf, height = 400, width = 600 )
 plot(1:50)
 dev.off()
 
-imageR(base64::img(tf))
+intense(base64::img(tf))
 ```
 
 ```r
@@ -49,8 +49,8 @@ dev.off()
 html_print(fluidPage(
   tags$h1("Cloud and Wireframe from Lattice")
   ,fluidRow(style = "height:60%; overflow:hidden;"
-    ,column(width = 6,  imageR(base64::img(tf)))
-    ,column(width = 6,  imageR(base64::img(tf2)))
+    ,column(width = 6,  intense(base64::img(tf)))
+    ,column(width = 6,  intense(base64::img(tf2)))
   )
 ))
 ```
@@ -82,7 +82,7 @@ png( file = tf, height = 1400, width = 1400 )
   ggplot(diamonds, aes(carat, price)) + geom_hex()
 dev.off()
 
-imageR(
+intense(
   tags$div(
     tags$h1("does this work? click and see")
     ,"data-image" = paste0("data:image/png;base64,",base64enc::base64encode(tf))
@@ -147,7 +147,7 @@ html_print(tagList(
   )
   ,add_font_awesome(n1)
   ,sortableR("sort-navr")
-  ,imageR( selector = "#sort-navr li" )
+  ,intense( selector = "#sort-navr li" )
 ))
 
 ```
