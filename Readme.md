@@ -50,6 +50,8 @@ dev.off()
 imageR(
   tags$img(
     style = "height:200px"
+    ,"data-title" = "sample intense plot"
+    ,"data-caption" = "imageR at work"
     ,src = paste0("data:image/png;base64,",base64enc::base64encode(tf))
   )
 )
