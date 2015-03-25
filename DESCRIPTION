@@ -5,7 +5,7 @@ Version: 0.1
 Date: 2015-03-24
 Authors@R: c(
     person(
-      "Mike", "Bostock", role = c("aut", "cph"), comment =
+      "Tim", "Holman", role = c("aut", "cph"), comment =
       "intense-images library in htmlwidgets/lib, http://tholman.com/intense-images/"
     ),
     person(
