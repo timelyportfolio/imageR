@@ -5,6 +5,8 @@
 
 As I was working on `imageR`, I discovered this poster [Redesign of cluster heatmap visualization technique](http://vizbi.org/Posters/2015/B04) through this [tweet](https://twitter.com/QuartzBio/status/580740607758467072).  The full-page zoomable is very similar to the effect achieved by `imageR`, so `imageR` might be a good preview for your next conference poster.
 
+### Simple Example
+
 ```r
 # devtools::install_github("timelyportfolio/imageR")
 
@@ -17,6 +19,8 @@ dev.off()
 
 intense(base64::img(tf))
 ```
+
+### Fancy Lattice 3d in Bootstrap
 
 ```r
 library(shiny)
@@ -55,13 +59,15 @@ html_print(fluidPage(
 ))
 ```
 
+### With a Title and Caption
+
 ```r
 tf <- tempfile()
 png( file = tf, height = 600, width = 1400 )
 plot(1:50)
 dev.off()
 
-imageR(
+intense(
   tags$img(
     style = "height:200px"
     ,"data-title" = "sample intense plot"
@@ -70,6 +76,9 @@ imageR(
   )
 )
 ```
+
+### With a Non-`img` Target
+
 
 ```r
 library(htmltools)
@@ -89,6 +98,8 @@ intense(
   )
 )
 ```
+
+### Composeable with Other htmlwidgets
 
 ```r
 library(htmltools)
