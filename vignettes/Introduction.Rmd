@@ -11,7 +11,7 @@ vignette: >
 
 `imageR` enlivens your images and plots from `R`.  As an htmlwidget, it works in all contexts with nearly all types of HTML elements.  While there are lots of great JavaScript image libraries, `imageR` will begin its life with a wrapper for [intense-images](http://tholman.com/) by the talented, creative, and funny [Tim Holman](http://tholman.com/).  I know humor is subjective, but test my definition of "funny" with Tim's [giflinks](http://tholman.com/giflinks/).
 
-Let's see a couple of ways we might use `imageR`.  Please don't let my lack of creativity hamper you.  Experiment, play, use, and share.  **Yes, it works on touch.**
+Let's see a couple of ways we might use `imageR`.  Please don't let my lack of creativity hamper you.  Experiment, play, use, and share.  **Yes, it works on touch devices** and is responsive, so try it on that little device in your pocket or purse.
 
 ### Quick Installation
 
@@ -50,6 +50,7 @@ local({
       style="height:200px;"
       ,src = dataURI(file=tf,mime="image/png")
     )
+    ,height = 200
   )
 })
 ```
@@ -71,7 +72,7 @@ local({
   # delete our tempfile on exit
   on.exit(unlink(tf))
   
-  # save our chart as a big png; exaggerate the width
+  # save our chart as a big png
   png( tf, height = 1200, width = 1200 )
     # make a kind of pretty chart
     pairs(USJudgeRatings, main="Example from ?pairs")
@@ -79,8 +80,63 @@ local({
   
   intense(
     tags$img(
-      style="height:400px;"
+      style="height:400px;overflow:hidden;"
       ,src = dataURI(file=tf,mime="image/png")
+    )
+    ,height = 400
+  )
+})
+```
+
+### Example with a Non-`img`
+
+`intense-images` also works with non-`img` elements, such as a `div`.  To make it work correctly, we'll use some extra tag attributes `data-image`, `data-title`, and `data-caption` on our non-`img`.  I bet you can guess what these attributes mean.  We'll use the same plot with some different colors as above to illustrate the difference.
+
+```{r "example_03"}
+library(imageR)
+library(htmltools)
+library(base64enc)
+
+# ignore the local if it confuses you
+# only use it to delete the tempfile on exit
+local({
+  # make a tempfile to hold our chart  
+  tf <- tempfile()
+  tf2 <- tempfile()
+  # delete our tempfile on exit
+  on.exit({unlink(tf);unlink(tf2)})
+
+  png( tf, height = 1200, width = 1200 )
+    # make a kind of pretty chart
+    pairs(USJudgeRatings, main="Example from ?pairs")
+  dev.off()
+  
+  # save our chart as a smaller png than above for demo
+  png( tf2, height = 800, width = 800 )
+    # make a kind of pretty chart
+    pairs(USJudgeRatings, main="Example from ?pairs",
+      pch = 4, col="blue", cex = 0.5
+    )
+  dev.off()
+  
+  tagList(
+    intense(
+      # method already shown
+      tags$img(
+        style="height:200px;width:200px;overflow:hidden"
+        ,src = dataURI(file=tf,mime="image/png")
+      )
+      ,height=250, width = 400
+    )
+    , intense(
+      tags$div(
+        "data-image" = dataURI(file=tf2,mime="image/png")
+        ,"data-title" = "?pairs example"
+        ,"data-caption" = "neat things happen with extra attributes"
+        ,style = "height:50px;width:250px;border: dashed 0.2em lightgray;"
+        ,"not an img but still intense; click me"
+      )
+      ,height = 250, width = 50
     )
   )
 })
