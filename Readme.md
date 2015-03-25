@@ -9,7 +9,7 @@
 library(imageR)
 
 tf <- tempfile()
-png( file = tf, height = 600, width = 600 )
+png( file = tf, height = 400, width = 600 )
 plot(1:50)
 dev.off()
 
@@ -28,7 +28,7 @@ png( file = tf, height = 600, width = 600 )
   image(volcano)
 dev.off()
 
-png( file = tf2, height = 400, width = 1000)
+png( file = tf2, height = 610, width = 870)
   ## volcano  ## 87 x 61 matrix
 wireframe(volcano, shade = TRUE,
           aspect = c(61/87, 0.4),
@@ -39,4 +39,18 @@ html_print(fluidPage(fluidRow(
   column(width = 6,  imageR(base64::img(tf)))
   ,column(width = 6,  imageR(base64::img(tf2)))
 )))
+```
+
+```r
+tf <- tempfile()
+png( file = tf, height = 600, width = 1400 )
+plot(1:50)
+dev.off()
+
+imageR(
+  tags$img(
+    style = "height:200px"
+    ,src = paste0("data:image/png;base64,",base64enc::base64encode(tf))
+  )
+)
 ```
