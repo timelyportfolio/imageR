@@ -1,58 +1,87 @@
 ---
-title: "Vignette Title"
+title: "Some Ideas for Using imageR"
 author: "Vignette Author"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Some Ideas for Using imageR}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+`imageR` enlivens your images and plots from `R`.  As an htmlwidget, it works in all contexts with nearly all types of HTML elements.  While there are lots of great JavaScript image libraries, `imageR` will begin its life with a wrapper for [intense-images](http://tholman.com/) by the talented, creative, and funny [Tim Holman](http://tholman.com/).  I know humor is subjective, but test my definition of "funny" with Tim's [giflinks](http://tholman.com/giflinks/).
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+Let's see a couple of ways we might use `imageR`.  Please don't let my lack of creativity hamper you.  Experiment, play, use, and share.  **Yes, it works on touch.**
 
-## Vignette Info
+### Quick Installation
 
-Note the various macros within the `vignette` setion of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+`imageR` has not stabilized enough for CRAN, so for now please install with `devtools::install_github`.
 
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+```{r eval = F}
+devtools::intall_github("timelyportfolio/imageR")
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+### Simple Example
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
+I say this is simple, but getting the image right will require use of `base64` encoding, which might be new to you.  `base64` might sound hard, but fortunately, two packages `base64enc` (which we'll use) and `base64` make it easy.
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+```{r "example_01"}
+library(imageR)
+library(htmltools)
+library(base64enc)
 
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+# ignore the local if it confuses you
+# only use it to delete the tempfile on exit
+local({
+  # make a tempfile to hold our chart  
+  tf <- tempfile()
+  # delete our tempfile on exit
+  on.exit(unlink(tf))
+  
+  # save our chart as a big png; exaggerate the width
+  png( tf, height = 800, width = 1600 )
+    # make a kind of pretty chart
+    plot(sin(0:90),cos(seq(0,360,by=4)),type="l", col= topo.colors(4))
+    lines(sin(0:90),cos(0:90),type="l",col=topo.colors(4)[3])
+  dev.off()
+  
+  intense(
+    tags$img(
+      style="height:200px;"
+      ,src = dataURI(file=tf,mime="image/png")
+    )
+  )
+})
 ```
 
-Also a quote using `>`:
+### Example with Pairs to Show Auto
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+In the first example, we exaggerated the width so you could see how the image pans from right to left based on your mouse or touch movement.  `intense-images` automatically decides to pan.  To see how it adjusts resize your window when in full-screen display mode.
+
+```{r "example_02"}
+library(imageR)
+library(htmltools)
+library(base64enc)
+
+# ignore the local if it confuses you
+# only use it to delete the tempfile on exit
+local({
+  # make a tempfile to hold our chart  
+  tf <- tempfile()
+  # delete our tempfile on exit
+  on.exit(unlink(tf))
+  
+  # save our chart as a big png; exaggerate the width
+  png( tf, height = 1200, width = 1200 )
+    # make a kind of pretty chart
+    pairs(USJudgeRatings, main="Example from ?pairs")
+  dev.off()
+  
+  intense(
+    tags$img(
+      style="height:400px;"
+      ,src = dataURI(file=tf,mime="image/png")
+    )
+  )
+})
+```
