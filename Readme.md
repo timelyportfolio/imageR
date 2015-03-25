@@ -69,7 +69,7 @@ dev.off()
 
 intense(
   tags$img(
-    style = "height:200px"
+    style = "height:25%;"
     ,"data-title" = "sample intense plot"
     ,"data-caption" = "imageR at work"
     ,src = paste0("data:image/png;base64,",base64enc::base64encode(tf))
