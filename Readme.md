@@ -3,7 +3,7 @@
 **This is experimental and pre-alpha**, but if you do everything just right you might get some worthwhile output.
 
 
-As I was working on `imageR`, I discovered this poster [Redesign of cluster heatmap visualization technique](http://vizbi.org/Posters/2015/B04) through this [tweet](https://twitter.com/QuartzBio/status/580740607758467072).  The full-page zoomable is very similar to the effect achieved by `imageR`, so `imageR` might be a good preview for your next conferenct poster.
+As I was working on `imageR`, I discovered this poster [Redesign of cluster heatmap visualization technique](http://vizbi.org/Posters/2015/B04) through this [tweet](https://twitter.com/QuartzBio/status/580740607758467072).  The full-page zoomable is very similar to the effect achieved by `imageR`, so `imageR` might be a good preview for your next conference poster.
 
 ```r
 # devtools::install_github("timelyportfolio/imageR")
