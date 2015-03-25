@@ -65,7 +65,7 @@ dev.off()
 
 imageR(
   tags$div(
-    tags$h1("does this work?")
+    tags$h1("does this work? click and see")
     ,"data-image" = paste0("data:image/png;base64,",base64enc::base64encode(tf))
   )
 )
