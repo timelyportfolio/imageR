@@ -11,6 +11,9 @@ HTMLWidgets.widget({
   },
 
   renderValue: function(el, x, instance) {
+    // start by clearing out the el if dynamic/Shiny
+    el.innerHTML = ""
+
     // will consider three cases
     //  one if img populated then assume we create the element with innerHTML
     //    and then run Intense on the childNodes
